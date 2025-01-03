@@ -1,0 +1,48 @@
+Getting started with an f8 softcore on a Tang Nano 9K board
+
+
+The hardware
+
+The Tang Nano 9K is a popular, cheap FPGA board.
+We use the Tang Nano 9K board as-is, without any additional hardware.
+
+
+The toolchain 
+
+* SDCC (4.5.0 or later)
+* sv2v (0.0.12 or later)
+* Icarus (12.0 or later)
+* Yosys (0.47 or later)
+* nextpnr (from repository as of end of 2024 - 0.7 is not recent enough)
+* Apicula
+* OpenFPGALoader
+
+Most of these are available as packages in OS distributions; if any of the tools is missing or tool old on in your distribution, compiling from source isn't hard.
+
+
+The f8 softcore and sample programs
+
+We will use a multicycle f8 implementation currently hosted at SourceForge, get via
+
+svn checkout svn://svn.code.sf.net/p/sdcc/code/branches/f8/f8 f8
+
+(or use git-svn if you prefer git)
+
+First, run some pre-synthesis tests:
+
+cd f8/hardware
+make tests2
+
+In the end, this should output a list of lines like "testsystem2: tests/clr/test2.log", but not "testsystem2: tests/clr/test2.log ERROR: TRAP".
+
+
+Blinky
+
+Attach the FPGA board to a USB port providing sufficient power (when I tried it on a bus-powered hub, the hub and all attached devices stopped working for me).
+Create an FPGA image and write it onto the board via
+
+make tests/cblink/tangnano9k2.fs
+openFPGALoader -b tangnano9k -f tests/cblink/tangnano9k2.fs
+
+This should result in the LEDs counting from 0 to 31: But at the time this tutorial is written, it just makes all LEDs on the board turn off. Apparently, the interrupt handler never gets called. However, the main program does run: we can affect what we see on the LEDs by putting e.g. into tests/cblink/test.c just before the for(;;); loop.
+

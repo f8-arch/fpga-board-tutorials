@@ -1,2 +1,25 @@
 Tutorials for getting started with an f8 softcore on an FPGA board.
 
+From blinking LEDs, via "Hello, world!" on a serial line to simple benchmarks.
+
+As far as possible, for all boards a free toolchain is used.
+
+Supported boards:
+
+* ICEBreaker
+  A free board design featuring the Lattice iCE40UP5K FPGA.
+  A free toolchain (sv2v+yosys+nextpnr+icepack+iceprog) works well for this board.
+  The f8 works well, but the limited resources of the iCE40UP5K can be a restriction for some uses.
+
+* GateMateA1-EVB
+  A free board design featuring the Cologne Chip GateMate CCGM1A1 FPGA.
+  Since a free toolchain (sv2v+yosys+nextpnr+icepack+iceprog) is not fully working yet, we use a non-free P&R tool.
+  The f8 works well.
+
+Work in progress:
+
+* Tang Nano 9K
+  A board featuring the Gowin GW1NR-9 FPGA.
+  The tutorial uses the free toolchain (sv2v+yosys+nextpnr+gowin_pack+), for parts of which GW1NR-9 FPGA support is still experimental.
+  The f8 will start up and execute code, but interrupts aren't working yet.
+
