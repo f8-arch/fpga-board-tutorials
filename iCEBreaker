@@ -41,8 +41,8 @@ Ensure the LED/button PMOD is at the PMOD2 connector (i.e. the default configura
 Attach the FPGA board to a USB port providing sufficient power (it won't work on a bus-powered hub).
 Create an FPGA image and write it onto the board via
 
-make tests/cblink/icebreaker2_synth.bin
-iceprog tests/cblink/icebreaker2_synth.bin
+make tests/cblink/icebreaker_2_synth.bin
+iceprog tests/cblink/icebreaker_2_synth.bin
 
 This should result in seconds being counted (0 to 31) on the 5 LED of the LED/button PMOD. The f8 can be reset via the button on the board. The source for the f8 program is tests/cblink/test.c: The timer is set up for a 1 kHz timer interrupt, and the interrupt handler increments the value on an I/O port once per second.
 
@@ -52,8 +52,8 @@ Hello, world!
 Attach the FPGA board to a USB port providing sufficient power. Two serial devices will appear (e.g. visible in dmesg output). The first is used for writing the FPGA image onto the board, the second is used fo communication witht he f8. Use a terminal program (auch as gtkterm) configured for the second serial port at 9600 baud, 1 stop bit, no parity.
 Create an FPGA image and write it onto the board via
 
-make tests/chello/icebreaker2_synth.bin
-iceprog tests/chello/icebreaker2_synth.bin
+make tests/chello/icebreaker_2_synth.bin
+iceprog tests/chello/icebreaker_2_synth.bin
 
 The text "Hello, world!" should be visible in your terminal program (and appear each time you reset the f8 via the button on the board). The source for the f8 program is tests/chello/test.c: The timer is set up for a 9.6 kHz timer interrupt, and the interrupt handler implements an UART in software, which i used to prove the C function putchar. This putchar is used for output to stdout by the ouput functions in the C standard library.
 
@@ -63,8 +63,8 @@ Dhrystone
 Use the same setup as for "Hello, world!" above. Create an FPGA image and write it onto the board via
 
 cd benchmarks
-make dhrystone/icebreaker2_synth.bin
-iceprog dhrystone/icebreaker2_synth.bin
+make dhrystone/icebreaker_2_synth.bin
+iceprog dhrystone/icebreaker_2_synth.bin
 
-At the time this tutorial is written, this will get us 592 Dhrystones/s on the f8 softcore running at 2 MHz. The f8 could actually run at higher clock speed, the 2 MHz were chosen to reuse the same code on multiple boards, since many boards support a clock that is a multiple of 2 MHz, including the iCEBreaker, which sues 12 MHz. An easy way to use a faster clock for the f8-based SoC is to adjust CLKDIV in icebreaker2.v.
+At the time this tutorial is written, this will get us 592 Dhrystones/s on the f8 softcore running at 2 MHz. The f8 could actually run at higher clock speed, the 2 MHz were chosen to reuse the same code on multiple boards, since many boards support a clock that is a multiple of 2 MHz, including the iCEBreaker, which uses 12 MHz. An easy way to use a faster clock for the f8-based SoC is to adjust CLKDIV in icebreaker2.v.
 

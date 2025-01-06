@@ -40,20 +40,20 @@ Ensure the LED/button PMOD is at the PMOD2 connector (i.e. the default configura
 Attach the FPGA board to a USB port.
 Create an FPGA image and write it onto the board via
 
-make tests/cblink/gatematea1evb2_synth_00.cfg.bit
-openFPGALoader -c dirtyJtag tests/cblink/gatematea1evb2_synth_00.cfg.bit
+make tests/cblink/gatematea1evb_2_synth_00.cfg.bit
+openFPGALoader -c dirtyJtag tests/cblink/gatematea1evb_2_synth_00.cfg.bit
 
-This should result in seconds being counted (0 to 31) on the 5 LED of the LED/button PMOD (actually at the time of writing this tutorial it counts twice as fast - need to investigate why). The f8 can be reset via the FPGA_BUT1 button on the board. The source for the f8 program is tests/cblink/test.c: The timer is set up for a 1 kHz timer interrupt, and the interrupt handler increments the value on an I/O port once per 1000 interrupts.
+This should result in seconds being counted (0 to 31) on the 5 LED of the LED/button PMOD. The f8 can be reset via the FPGA_BUT1 button on the board. The source for the f8 program is tests/cblink/test.c: The timer is set up for a 1 kHz timer interrupt, and the interrupt handler increments the value on an I/O port once per 1000 interrupts.
 
 
 Hello, world!
 
 Connect a TTL level serial cable (e.g. a USB-serial converter) to the UEXT1 connector (GND to pin 2, RX to pin 3).
-Attach the FPGA board to a USB port. Use a terminal program (auch as gtkterm) configured for the serial port at 9600 baud (actually you should set it to 19200 baud,a s for some reason the board is currently running at twice the speed it should), 1 stop bit, no parity.
+Attach the FPGA board to a USB port. Use a terminal program (auch as gtkterm) configured for the serial port at 9600 baud, 1 stop bit, no parity.
 Create an FPGA image and write it onto the board via
 
-make tests/chello/gatematea1evb2_synth_00.cfg.bit
-openFPGALoader -c dirtyJtag tests/chello/gatematea1evb2_synth_00.cfg.bit
+make tests/chello/gatematea1evb_2_synth_00.cfg.bit
+openFPGALoader -c dirtyJtag tests/chello/gatematea1evb_2_synth_00.cfg.bit
 
 The text "Hello, world!" should be visible in your terminal program (and appear each time you reset the f8 via the FPGA_BUT1 button on the board). The source for the f8 program is tests/chello/test.c: The timer is set up for a 9.6 kHz timer interrupt, and the interrupt handler implements an UART in software, which i used to prove the C function putchar. This putchar is used for output to stdout by the ouput functions in the C standard library.
 
@@ -63,8 +63,8 @@ Dhrystone
 Use the same setup as for "Hello, world!" above. Create an FPGA image and write it onto the board via
 
 cd benchmarks
-make dhrystone/gatematea1evb2_synth_00.cfg.bit
-iceprog dhrystone/gatematea1evb2_synth_00.cfg.bit
+make dhrystone/gatematea1evb_2_synth_00.cfg.bit
+iceprog dhrystone/gatematea1evb_2_synth_00.cfg.bit
 
-At the time this tutorial is written, this show a benchmark score of 592 Dhrystones/s (actually, the f8 is running at twice the frequency it should, but this does not affect the reported score, as the clock used to calculate the time passed is also running at twice the speed it should).
+At the time this tutorial is written, this shows a benchmark score of 592 Dhrystones/s. The f8 could actually run at much higher clock speed, the 2 MHz were chosen to reuse the same code on multiple boards, since many boards support a clock that is a multiple of 2 MHz, including the iCEBreaker, which sues 12 MHz. An easy way to use a faster clock for the f8-based SoC is to adjust CLKDIV in icebreaker2.v.
 
