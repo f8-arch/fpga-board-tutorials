@@ -1,10 +1,10 @@
-Getting started with an f8 softcore on an ICEBreaker board
+Getting started with an f8 softcore on an iCEBreaker board
 
 
 The hardware
 
-The ICEBreaker is a popular cheap FPGA board, featuring an FPGA well-supported by a free toolchain. The board design is also free.
-We use the ICEBreaker board with the LED/button PMOD at the PMOD2 connector (i.e. the default configuration of a freshly-bought ICEBreaker).
+The iCEBreaker is a popular cheap FPGA board, featuring an FPGA well-supported by a free toolchain. The board design is also free.
+We use the iCEBreaker board with the LED/button PMOD at the PMOD2 connector (i.e. the default configuration of a freshly-bought iCEBreaker).
 
 
 The toolchain 
@@ -37,7 +37,7 @@ In the end, this should output a list of lines like "testsystem2: tests/clr/test
 
 Blinky
 
-Ensure the LED/button PMOD is at the PMOD2 connector (i.e. the default configuration of a freshly-bought ICEBreaker).
+Ensure the LED/button PMOD is at the PMOD2 connector (i.e. the default configuration of a freshly-bought iCEBreaker).
 Attach the FPGA board to a USB port providing sufficient power (it won't work on a bus-powered hub).
 Create an FPGA image and write it onto the board via
 
@@ -66,5 +66,5 @@ cd benchmarks
 make dhrystone/icebreaker2_synth.bin
 iceprog dhrystone/icebreaker2_synth.bin
 
-At the time this tutorial is written, this will get us 592 Dhrystones/s on the f8 softcore running at 2 MHz. The f8 could actually run at higher clock speed, the 2 MHz were chosen to reuse the same code on multiple boards, since many boards support a clock that is a multiple of 2 MHz, including the iceBreaker, which sues 12 MHz. An easy way to use a faster clock for the f8-based SoC is to adjust CLKDIV in icebreaker2.v.
+At the time this tutorial is written, this will get us 592 Dhrystones/s on the f8 softcore running at 2 MHz. The f8 could actually run at higher clock speed, the 2 MHz were chosen to reuse the same code on multiple boards, since many boards support a clock that is a multiple of 2 MHz, including the iCEBreaker, which sues 12 MHz. An easy way to use a faster clock for the f8-based SoC is to adjust CLKDIV in icebreaker2.v.
 

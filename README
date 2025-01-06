@@ -6,7 +6,7 @@ As far as possible, for all boards a free toolchain is used.
 
 Supported boards:
 
-* ICEBreaker
+* iCEBreaker
   A free board design featuring the Lattice iCE40UP5K FPGA.
   A free toolchain (sv2v+yosys+nextpnr+icepack+iceprog) works well for this board.
   The f8 works well, but the limited resources of the iCE40UP5K can be a restriction for some uses.
