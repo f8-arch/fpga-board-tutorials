@@ -29,7 +29,7 @@ svn checkout svn://svn.code.sf.net/p/sdcc/code/branches/f8/f8 f8
 First, run some pre-synthesis tests:
 
 cd f8/hardware
-make tests2
+make tests_2
 
 In the end, this should output a list of lines like "testsystem2: tests/clr/test2.log", but not "testsystem2: tests/clr/test2.log ERROR: TRAP".
 
