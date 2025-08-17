@@ -64,7 +64,7 @@ Use the same setup as for "Hello, world!" above. Create an FPGA image and write 
 
 cd benchmarks
 make dhrystone/gatematea1evb_2_synth_00.cfg.bit
-iceprog dhrystone/gatematea1evb_2_synth_00.cfg.bit
+openFPGALoader -c dirtyJtag dhrystone/gatematea1evb_2_synth_00.cfg.bit
 
 At the time this tutorial is written, this shows a benchmark score of 592 Dhrystones/s. The f8 could actually run at much higher clock speed, the 2 MHz were chosen to reuse the same code on multiple boards, since many boards support a clock that is a multiple of 2 MHz, including the iCEBreaker, which sues 12 MHz. An easy way to use a faster clock for the f8-based SoC is to adjust CLKDIV in icebreaker2.v.
 
